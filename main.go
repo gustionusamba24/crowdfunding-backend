@@ -26,5 +26,6 @@ func main() {
 	api := router.Group("/api/v1")
 
 	api.POST("/users", userHandler.RegisterUser)
+
 	router.Run(":9000")
 }
