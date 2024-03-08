@@ -1,8 +1,10 @@
 package main
 
 import (
+	"crowdfunding_app/auth"
 	"crowdfunding_app/handler"
 	"crowdfunding_app/user"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -19,6 +21,9 @@ func main() {
 
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
+	authService := auth.NewService()
+
+	fmt.Println(authService.GenerateToken(1001))
 
 	userService.SaveAvatar(1, "images/1-profile.png")
 
