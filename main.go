@@ -4,7 +4,6 @@ import (
 	"crowdfunding_app/auth"
 	"crowdfunding_app/handler"
 	"crowdfunding_app/user"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -23,11 +22,7 @@ func main() {
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
 
-	fmt.Println(authService.GenerateToken(1001))
-
-	userService.SaveAvatar(1, "images/1-profile.png")
-
-	userHandler := handler.NewUserHandler(userService)
+	userHandler := handler.NewUserHandler(userService, authService)
 
 	router := gin.Default()
 	api := router.Group("/api/v1")
