@@ -3,11 +3,14 @@ package main
 import (
 	"crowdfunding_app/auth"
 	"crowdfunding_app/handler"
+	"crowdfunding_app/helper"
 	"crowdfunding_app/user"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
+	"net/http"
+	"strings"
 )
 
 func main() {
@@ -33,4 +36,22 @@ func main() {
 	api.POST("/avatars", userHandler.UploadAvatar)
 
 	router.Run(":9000")
+}
+
+func authMiddleware(c *gin.Context) {
+	authHeader := c.GetHeader("Authorization")
+
+	if !strings.Contains(authHeader, "Bearer") {
+		response := helper.APIResponse("Unauthorized", http.StatusUnauthorized, "failed", nil)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, response)
+		return
+	}
+
+	tokenString = ""
+	arrayToken := strings.Split(authHeader, " ")
+	if len(arrayToken) == 2 {
+		tokenString = arrayToken[1]
+	}
+
+	token, err := 
 }
