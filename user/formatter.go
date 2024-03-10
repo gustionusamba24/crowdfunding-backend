@@ -9,7 +9,7 @@ type UserFormatter struct {
 }
 
 func FormatUser(user User, token string) UserFormatter {
-	formatter := UserFormatter{
+	userFormatter := UserFormatter{
 		ID:         user.ID,
 		Name:       user.Name,
 		Occupation: user.Occupation,
@@ -17,5 +17,5 @@ func FormatUser(user User, token string) UserFormatter {
 		Token:      token,
 	}
 
-	return formatter
+	return userFormatter
 }
