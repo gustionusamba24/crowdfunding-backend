@@ -66,7 +66,6 @@ func (h *campaignHandler) CreateCampaign(c *gin.Context) {
 	}
 
 	currentUser := c.MustGet("currentUser").(user.User)
-
 	input.User = currentUser
 
 	newCampaign, err := h.service.CreateCampaign(input)
@@ -100,6 +99,9 @@ func (h *campaignHandler) UpdateCampaign(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
+
+	currentUser := c.MustGet("currentUser").(user.User)
+	inputData.User = currentUser
 
 	updatedCampaign, err := h.service.UpdateCampaign(inputID, inputData)
 	if err != nil {
