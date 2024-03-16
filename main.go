@@ -5,6 +5,7 @@ import (
 	"crowdfunding_app/campaign"
 	"crowdfunding_app/handler"
 	"crowdfunding_app/helper"
+	"crowdfunding_app/payment"
 	"crowdfunding_app/transaction"
 	"crowdfunding_app/user"
 	"github.com/gin-gonic/gin"
@@ -31,7 +32,8 @@ func main() {
 	userService := user.NewService(userRepository)
 	campaignService := campaign.NewService(campaignRepository)
 	authService := auth.NewService()
-	transactionService := transaction.NewService(transactionRepository, campaignRepository)
+	paymentService := payment.NewService()
+	transactionService := transaction.NewService(transactionRepository, campaignRepository, paymentService)
 
 	userHandler := handler.NewUserHandler(userService, authService)
 	campaignHandler := handler.NewCampaignHandler(campaignService)
