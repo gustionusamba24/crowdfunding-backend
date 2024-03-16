@@ -8,7 +8,7 @@ import (
 )
 
 type Service interface {
-	GetToken(transaction transaction.Transaction, user user.User) (string, error)
+	GetPaymentURL(transaction transaction.Transaction, user user.User) (string, error)
 }
 
 type service struct {
@@ -18,7 +18,7 @@ func NewService() *service {
 	return &service{}
 }
 
-func (s *service) GetToken(transaction transaction.Transaction, user user.User) (string, error) {
+func (s *service) GetPaymentURL(transaction transaction.Transaction, user user.User) (string, error) {
 	midclient := midtrans.NewClient()
 	midclient.ServerKey = ""
 	midclient.ClientKey = ""
