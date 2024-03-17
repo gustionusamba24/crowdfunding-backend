@@ -1,6 +1,7 @@
 package payment
 
 import (
+	"crowdfunding_app/campaign"
 	"crowdfunding_app/transaction"
 	"crowdfunding_app/user"
 	midtrans "github.com/veritrans/go-midtrans"
@@ -14,10 +15,11 @@ type Service interface {
 
 type service struct {
 	transactionRepository transaction.Repository
+	campaignRepository    campaign.Repository
 }
 
-func NewService(transactionRepository transaction.Repository) *service {
-	return &service{transactionRepository}
+func NewService(transactionRepository transaction.Repository, campaignRepository campaign.Repository) *service {
+	return &service{transactionRepository, campaignRepository}
 }
 
 func (s *service) GetPaymentURL(transaction Transaction, user user.User) (string, error) {
@@ -69,4 +71,21 @@ func (s *service) ProcessPayment(input transaction.TransactionNotificationInput)
 	if err != nil {
 		return err
 	}
+
+	campaign, err := s.campaignRepository.FindByID(updatedTransaction.CampaignID)
+	if err != nil {
+		return err
+	}
+
+	if updatedTransaction.Status == "paid" {
+		campaign.BackerCount = campaign.BackerCount + 1
+		campaign.CurrentAmount = campaign.CurrentAmount + updatedTransaction.Amount
+
+		_, err := s.campaignRepository.Update(campaign)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
