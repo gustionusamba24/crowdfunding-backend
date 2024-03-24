@@ -33,7 +33,9 @@ func (h *userHandler) Create(c *gin.Context) {
 
 	err := c.ShouldBind(&input)
 	if err != nil {
-
+		input.Error = err
+		c.HTML(http.StatusOK, "user_new.html", input)
+		return
 	}
 
 	registerInput := user.RegisterUserInput{
@@ -45,7 +47,8 @@ func (h *userHandler) Create(c *gin.Context) {
 
 	_, err = h.userService.RegisterUser(registerInput)
 	if err != nil {
-
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
 	}
 
 	c.Redirect(http.StatusFound, "/users")
