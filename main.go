@@ -101,6 +101,7 @@ func main() {
 	router.GET("/transactions", authAdminMiddleware(), transactionWebHandler.Index)
 
 	router.GET("/login", sessionWebHandler.New)
+	router.POST("/session", sessionWebHandler.Create)
 
 	router.Run(":9000")
 }
