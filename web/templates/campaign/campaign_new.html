@@ -1,4 +1,5 @@
 {{ define "content" }}
+
 <h2 class="mb-4">New Campaign</h2>
 
 {{ if .Error }}
@@ -13,15 +14,16 @@
             <div class="form-group">
                 <label for="user_id">User</label>
                 <select name="user_id" class="form-control">
-                    <option value="">-- Select User --</option>
+                    <option value="">-- Select user --</option>
                     {{ range .Users }}
-                        {{ if eq .ID $.UserID }}
-                            <option value="{{ .ID }}" selected>{{ .Name }}</option>
-                        {{ else }}
-                            <option value="{{ .ID }}">{{ .Name }}</option>
-                        {{ end }}
+                    {{ if eq .ID $.UserID }}
+                    <option value="{{ .ID }}" selected>{{ .Name }}</option>
+                    {{ else }}
+                    <option value="{{ .ID }}">{{ .Name }}</option>
+                    {{ end }}
                     {{ end }}
                 </select>
+
             </div>
 
             <div class="form-group">
@@ -34,7 +36,7 @@
                 <input type="text" name="short_description" placeholder="Enter short description" required class="form-control" value="{{ .ShortDescription }}">
             </div>
 
-            <div class="form-control">
+            <div class="form-group">
                 <label for="description">Description</label>
                 <textarea name="description" cols="30" rows="10" placeholder="Enter description" required class="form-control">{{ .Description }}</textarea>
             </div>
