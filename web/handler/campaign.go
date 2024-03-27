@@ -5,6 +5,7 @@ import (
 	"crowdfunding_app/user"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 type campaignHandler struct {
@@ -79,4 +80,11 @@ func (h *campaignHandler) Create(c *gin.Context) {
 	}
 
 	c.Redirect(http.StatusFound, "/campaigns")
+}
+
+func (h *campaignHandler) NewImage(c *gin.Context) {
+	idParam := c.Param("id")
+	id, _ := strconv.Atoi(idParam)
+
+	c.HTML(http.StatusOK, "campaign_image.html", gin.H{"ID": id})
 }
