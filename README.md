@@ -69,5 +69,30 @@ Crowdfunding is a way of raising money to finance projects or business. This pro
 - **`POST` - `/session`**, Login user (only admin role can do log in)
 - **`GET` - `/logout`**, Logout user
 
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/gustionusamba24/crowdfunding-backend.git
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  go get
+```
+
+Start the server
+
+```bash
+  go run main.go
+```
 
 
