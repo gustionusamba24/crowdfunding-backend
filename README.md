@@ -41,6 +41,33 @@ Crowdfunding is a way of raising money to finance projects or business. This pro
 - **`GET` - `api/v1/transactions`**, Get the transaction data from users who make transactions
 - **`POST` - `api/v1/transactions`**, Create transaction
 
+## CMS Route
+### Users
+- **`GET` - `/users`**, Get all users
+- **`GET` - `/users/new`**, New user form route
+- **`POST` - `/users`**, New user form submit
+- **`GET` - `/users/edit/:id`**, Edit user form route
+- **`POST` - `/users/update/:id`**, Edit user form submit
+- **`GET` - `/users/avatar/:id`**, New user's avatar form route
+- **`POST` - `/users/avatar/:id`**, New user's avatar form submit
+
+### Campaigns
+- **`GET` - `/campaigns`**, Get all campaigns
+- **`GET` - `/campaigns/new`**, New campaign form route
+- **`POST` - `/campaigns`**, New campaign form submit
+- **`GET` - `/campaigns/image/:id`**, New campaign's image form route
+- **`POST` - `/campaigns/image/:id`**, New campaign's image form submit
+- **`GET` - `/campaigns/edit/:id`**, Edit campaign's image form route
+- **`POST` - `/campaigns/update/:id`**, Edit campaign's image form submit
+- **`GET` - `/campaigns/show/:id`**, Get campaign detail
+
+### Transactions
+- **`GET` - `/transactions`**, Get all transactions
+
+### Sessions
+- **`GET` - `/login`**, Login form
+- **`POST` - `/session`**, Login user (only admin role can do log in)
+- **`GET` - `/logout`**, Logout user
 
 
 
